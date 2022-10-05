@@ -602,11 +602,12 @@ def test_exchange_rate_calculation_usd_eur_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount / course
-        result = float(f'{result:.4f}')
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
         course_site = float(course_site)
+        course_site = float(f'{course_site:.3f}')
     assert course_site == result
 
 
