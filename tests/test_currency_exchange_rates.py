@@ -1,11 +1,9 @@
-from selenium.webdriver.common.by import By
-from ..pages.home_page import HomePage
-from ..pages.currency_exchange_rates_page import CurrencyExchange
-import requests
-import pytest
-import re
 from datetime import datetime
+import pytest
 import allure
+import requests
+from pages.home_page import HomePage
+from pages.currency_exchange_rates_page import CurrencyExchange
 
 
 @allure.feature('Currency exchange page')
@@ -18,7 +16,9 @@ def test_currency_convertor_panel_is_displayed(driver):
         home_page.currency_exchange_rate_click()
         currency_exchange = CurrencyExchange(driver)
     assert currency_exchange.currency_convertor_panel().is_displayed()
-    assert currency_exchange.currency_convertor_panel_text().text == 'Конвертер валют по лучшим курсам'
+    assert currency_exchange.currency_convertor_panel_text().text == (
+        'Конвертер валют по лучшим курсам'
+    )
 
 
 # @allure.feature('Currency exchange page')
@@ -30,7 +30,8 @@ def test_currency_convertor_panel_is_displayed(driver):
 #     with allure.step('Open currency exchange page'):
 #         home_page.currency_exchange_rate_click()
 #         currency_exchange = CurrencyExchange(driver)
-#     assert currency_exchange.currency_convertor_panel_text().text == 'Конвертер валют по лучшим курсам'
+#     assert currency_exchange.currency_convertor_panel_text().text ==
+#     'Конвертер валют по лучшим курсам'
 
 
 @allure.feature('Currency exchange page')
@@ -188,8 +189,9 @@ def test_select_usd(driver):
     with allure.step('Open currency exchange page'):
         home_page.currency_exchange_rate_click()
         currency_exchange = CurrencyExchange(driver)
-    with allure.step('Selected usd in currency convertor panel'):
+    with allure.step('Selected byn in currency convertor panel'):
         currency_exchange.selected_byn()
+    with allure.step('Selected usd in currency convertor panel'):
         currency_exchange.selected_usd()
     assert currency_exchange.type_of_input_currency_select_usd().is_selected()
 
@@ -255,7 +257,7 @@ def test_select_out_usd(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_nbrb_usd_course_convertor_panel(domain, driver):
+def test_nbrb_usd_exchange_rate_convertor_panel(domain, driver):
     with allure.step("getting the National Bank's API of the usd exchange rate"):
         response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
         dollar_exchange_rate = response['Cur_OfficialRate']
@@ -267,7 +269,7 @@ def test_nbrb_usd_course_convertor_panel(domain, driver):
         currency_exchange = CurrencyExchange(driver)
     exchange_rate = currency_exchange.exchange_rate_nbrb().text
     str_exchange_rate = exchange_rate.replace(',', '.')
-    assert str_exchange_rate == f'{dollar_exchange_rate}'
+    assert float(str_exchange_rate) == dollar_exchange_rate
 
 
 @allure.feature('Currency exchange page')
@@ -297,7 +299,7 @@ def test_correct_exchange_rate_calculation_nbrb_usd_convertor_panel(domain, the_
         response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
         dollar_exchange_rate = response['Cur_OfficialRate']
         correct_result = the_amount * dollar_exchange_rate
-        result = float("{0:.2f}".format(correct_result))
+        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -323,7 +325,7 @@ def test_correct_exchange_rate_calculation_nbrb_eur_convertor_panel(domain, the_
         response = requests.request('GET', f'{domain}api/exrates/rates/EUR?parammode=2').json()
         euro_exchange_rate = response['Cur_OfficialRate']
         correct_result = euro_exchange_rate * the_amount
-        result = float("{0:.2f}".format(correct_result))
+        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -351,7 +353,7 @@ def test_correct_exchange_rate_calculation_nbrb_rub_convertor_panel(domain, the_
         response = requests.request('GET', f'{domain}api/exrates/rates/RUB?parammode=2').json()
         rub_exchange_rate = response['Cur_OfficialRate']
         correct_result = (the_amount * rub_exchange_rate) / 100
-        result = float("{0:.2f}".format(correct_result))
+        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -415,7 +417,7 @@ def test_exchange_rate_calculation_usd_byn_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = course * the_amount
-        result = float("{0:.3f}".format(result))
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -445,7 +447,7 @@ def test_exchange_rate_calculation_eur_byn_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = course * the_amount
-        result = float("{0:.3f}".format(result))
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -474,9 +476,9 @@ def test_exchange_rate_calculation_rub_byn_sell_convertor_panel(driver, the_amou
         course_calculation = best_course.replace(',', '.')
         course = course_calculation.replace(' ', '')
         course = float(course)
-        course = float("{0:.3f}".format(course))
+        course = float(f'{course:.3f}')
         result = (the_amount / 100) * course
-        result = float("{0:.3f}".format(result))
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -506,7 +508,7 @@ def test_exchange_rate_calculation_usd_byn_by_convertor_panel(driver, the_amount
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount * course
-        result = float("{0:.3f}".format(result))
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -538,7 +540,7 @@ def test_exchange_rate_calculation_eur_byn_by_convertor_panel(driver, the_amount
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount * course
-        result = float("{0:.3f}".format(result))
+        result = float(f'{result:.3f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -570,7 +572,7 @@ def test_exchange_rate_calculation_rub_byn_by_convertor_panel(driver, the_amount
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = (the_amount * course) / 100
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -600,7 +602,7 @@ def test_exchange_rate_calculation_usd_eur_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount / course
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -630,12 +632,12 @@ def test_exchange_rate_calculation_usd_rub_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount * course
-        result = float("{0:.2f}".format(result))
+        result = float(f'{result:.2f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
         course_site = float(course_site)
-        course_site = float("{0:.2f}".format(course_site))
+        course_site = float(f'{course_site:.2f}')
     assert course_site == result
 
 
@@ -663,12 +665,12 @@ def test_exchange_rate_calculation_eur_usd_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount * course
-        result = float("{0:.2f}".format(result))
+        result = float(f'{result:.2f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
         course_site = float(course_site)
-        course_site = float("{0:.2f}".format(course_site))
+        course_site = float(f'{course_site:.2f}')
     assert course_site == result
 
 
@@ -696,12 +698,12 @@ def test_exchange_rate_calculation_eur_rub_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount * course
-        result = float("{0:.2f}".format(result))
+        result = float(f'{result:.2f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
         course_site = float(course_site)
-        course_site = float("{0:.2f}".format(course_site))
+        course_site = float(f'{course_site:.2f}')
     assert course_site == result
 
 
@@ -729,12 +731,12 @@ def test_exchange_rate_calculation_rub_usd_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course_rub = float(course)
         result = the_amount / course_rub
-        result = float("{0:.2f}".format(result))
+        result = float(f'{result:.2f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
         course_site = float(course_site)
-        course_site = float("{0:.2f}".format(course_site))
+        course_site = float(f'{course_site:.2f}')
     assert course_site == result
 
 
@@ -762,7 +764,7 @@ def test_exchange_rate_calculation_byn_usd_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount / course
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -794,7 +796,7 @@ def test_exchange_rate_calculation_byn_eur_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount / course
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -826,7 +828,7 @@ def test_exchange_rate_calculation_byn_rub_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = (the_amount / course) * 100
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -858,7 +860,7 @@ def test_exchange_rate_calculation_rub_eur_sell_convertor_panel(driver, the_amou
         course = course_calculation.replace(' ', '')
         course = float(course)
         result = the_amount / course
-        result = float("{0:.4f}".format(result))
+        result = float(f'{result:.4f}')
         calculation_site = currency_exchange.estimated_mount().text
         course_calculation = calculation_site.replace(',', '.')
         course_site = course_calculation.replace(' ', '')
@@ -963,7 +965,9 @@ def test_check_exchange_rate_fluctuations_text(driver):
     with allure.step('Open currency exchange page'):
         home_page.currency_exchange_rate().click()
         currency_exchange = CurrencyExchange(driver)
-    assert currency_exchange.exchange_rate_fluctuations_text() == 'Колебания лучших курсов за последние 14 дней'
+    assert currency_exchange.exchange_rate_fluctuations_text() == (
+        'Колебания лучших курсов за последние 14 дней'
+    )
 
 
 @allure.feature('Currency exchange page')
@@ -1088,7 +1092,7 @@ def test_nbrb_rate_one_usd(domain, driver):
         currency_exchange = CurrencyExchange(driver)
         rate_nbrb = currency_exchange.nbrb_rate_one_usd().text
         rate_nbrb = rate_nbrb.replace(',', '.')
-    assert rate_nbrb == f'{dollar_exchange_rate}'
+    assert float(rate_nbrb) == dollar_exchange_rate
 
 
 @allure.feature('Currency exchange page')
@@ -1862,45 +1866,3 @@ def test_button_fluctuations_in_the_best_rates_rub_usd_rub_enabled(driver):
 #     currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_sell().click()
 #     currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().click()
 #     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().is_enabled()
-
-
-
-
-def test_hz(driver):
-    driver.get('https://kurs.onliner.by/')
-    driver.find_element(
-        By.XPATH, '//*[@id="container"]/div/div[2]/div/div/div/div[2]/div[2]/div/div/table/tbody/tr/td/table[1]/tbody/tr/td[1]/p[2]/a'
-    ).click()
-    driver.execute_script("window.scrollTo(document.body.scrollHeight, 2000);")
-    # driver.find_element(By.XPATH, '//tr[@class="merge"]/td').click()
-    catalog_list = []
-    my_list = []
-    element = driver.find_elements(By.XPATH, '//*[@id="container"]/div/div[2]/div/div/div/div[2]/div[2]/div/div/table/tbody/tr/td/table[2]/tbody/tr')
-
-
-    for i in element:
-        c = i
-        f = c.text
-        d = f.replace(',', '.')
-        catalog_list.append(d)
-
-    for i in catalog_list:
-        fruit_dictionary = dict.fromkeys(i, "In stock")
-        print(fruit_dictionary)
-
-    pass
-    s = ' '.join(catalog_list)
-    nums = re.findall(r'\d*\.\d+|\d+', s)
-
-    nums = [float(i) for i in nums]
-
-
-
-    print(nums)
-
-    for i in catalog_list:
-        print(i[0:14])
-
-
-
-

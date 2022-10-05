@@ -2,9 +2,9 @@ from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
-import settings
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+import settings
 
 RU_MONTH_VALUES = {
     'января': 1,
@@ -20,6 +20,11 @@ RU_MONTH_VALUES = {
     'ноября': 11,
     'декабря': 12,
 }
+def int_value_from_ru_month(date_str):
+    month = RU_MONTH_VALUES
+    for key, value in month.items():
+        date_str = date_str.replace(key, str(value))
+    return date_str
 
 
 class BasePage:
@@ -40,19 +45,15 @@ class BasePage:
         return ActionChains(self.driver).move_to_element(element)
 
     def down_control(self, element):
-        return ActionChains(self.driver).key_down(Keys.CONTROL).click(element).key_up(Keys.CONTROL).perform()
+        return ActionChains(self.driver).key_down(
+            Keys.CONTROL
+        ).click(element).key_up(
+            Keys.CONTROL
+        ).perform()
 
     def select(self, *args):
         element, value = args[0]
         return Select(self.driver.find_element(element, value))
 
-    def int_value_from_ru_month(self, date_str):
-        for k, v in RU_MONTH_VALUES.items():
-            date_str = date_str.replace(k, str(v))
-        return date_str
-
     def driver_wait(self, locator, time=10):
         return WebDriverWait(self.driver, time).until(EC.element_to_be_clickable(locator))
-
-
-

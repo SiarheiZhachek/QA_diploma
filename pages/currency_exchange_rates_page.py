@@ -1,5 +1,6 @@
-from .base_page import BasePage
-from ..pages.locators import currency_exchange_rates_page_locators as loc
+from pages.base_page import BasePage
+from pages.locators import currency_exchange_rates_page_locators as loc
+from pages.base_page import int_value_from_ru_month
 
 
 class CurrencyExchange(BasePage):
@@ -26,7 +27,7 @@ class CurrencyExchange(BasePage):
         return self.find_element(loc.type_of_input_currency)
 
     def selected_usd(self):
-        return self.select(loc.currency_convertor_panel).select_by_value('usd')
+        return self.select(loc.type_of_input_currency).select_by_value('usd')
 
     def type_of_input_currency_select_usd(self):
         return self.find_element(loc.currency_in_usd)
@@ -99,7 +100,7 @@ class CurrencyExchange(BasePage):
 
     def date(self):
         date = self.find_element(loc.date).text
-        return self.int_value_from_ru_month(date)
+        return int_value_from_ru_month(date)
 
     def the_bank_buys_text(self):
         return self.find_element(loc.the_bank_buys).text
@@ -322,7 +323,3 @@ class CurrencyExchange(BasePage):
 
     def button_fluctuations_in_the_best_rates_usd_rub_buy(self):
         return self.find_elements(loc.button_fluctuations_in_the_best_rates)[15]
-
-
-
-

@@ -29,8 +29,7 @@ exchange_rate_fluctuations = (By.XPATH, '//table[@class="b-currency-table"]/thea
 the_all_bank_sells_by_price = (By.XPATH, '//tr[@class="tr-main"]/td[2]/p/b')
 currency_information_panel = (By.XPATH, '//tr[@class="tr-main"]')
 information_panel_attribute = (By.XPATH, '//table[@class="b-currency-table__best"]/tbody/tr/td/p/b')
-exchange_rate_in_banks = (By.XPATH, '//p[@class="bank"]')
+exchange_rate_in_banks = (By.XPATH, '//p[@class="bank"]/a')
 banks = (By.XPATH, '//td[@class="bank"]')
 maps = (By.CLASS_NAME, 'b-currency-map-i')
 button_fluctuations_in_the_best_rates = (By.XPATH, '//ul[@class="b-currency-chart__toggle"]/li/a')
-

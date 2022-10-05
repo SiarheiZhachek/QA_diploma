@@ -1,8 +1,8 @@
-from ..pages.home_page import HomePage
 import requests
-from selenium.common.exceptions import NoSuchElementException
 import allure
+from pages.home_page import HomePage
 from allure_commons.types import AttachmentType
+from selenium.common.exceptions import NoSuchElementException
 
 
 @allure.feature('Home page')
@@ -323,7 +323,7 @@ def test_making_a_credit_card_button_is_displayed(driver):
 
 @allure.feature('Home page')
 @allure.story('Currency exchange')
-def test_currency_exchange_rate_is_displayed(driver):
+def test_currency_exchange_rate_is_displayed_and_click(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -472,7 +472,9 @@ def test_vk_account_link_is_displayed(driver):
 #     with allure.step('Vk account link click'):
 #         home_page.vk_account_link_click()
 #         driver.switch_to.window(driver.window_handles[1])
-#     assert driver.current_url == 'https://gc.onliner.by/views/social-auth.html?socialType=vkontakte'
+#     assert driver.current_url == '
+#     https://gc.onliner.by/views/social-auth.html?socialType=vkontakte
+#     '
 
 
 @allure.feature('Home page')
@@ -485,7 +487,9 @@ def test_facebook_account_link_is_displayed(driver):
     with allure.step('Facebook account link click'):
         home_page.facebook_account_link_click()
         driver.switch_to.window(driver.window_handles[1])
-    assert driver.current_url == 'https://gc.onliner.by/views/social-auth.html?socialType=facebook'
+    assert driver.current_url == (
+        'https://gc.onliner.by/views/social-auth.html?socialType=facebook'
+    )
 
 
 # @allure.feature('Home page')
@@ -497,7 +501,9 @@ def test_facebook_account_link_is_displayed(driver):
 #     with allure.step('Facebook account link click'):
 #         home_page.facebook_account_link_click()
 #         driver.switch_to.window(driver.window_handles[1])
-#     assert driver.current_url == 'https://gc.onliner.by/views/social-auth.html?socialType=facebook'
+#     assert driver.current_url == '
+#     https://gc.onliner.by/views/social-auth.html?socialType=facebook
+#     '
 
 
 @allure.feature('Home page')
@@ -545,9 +551,6 @@ def test_the_search_field_is_displayed(driver):
         driver.switch_to.frame(iframe)
     assert home_page.search_bar_iframe().is_displayed()
     with allure.step('The search field is working'):
-        home_page.the_search_field_is_working()
-        iframe = home_page.iframe_search_field()
-        driver.switch_to.frame(iframe)
         allure.attach(
             driver.get_screenshot_as_png(),
             name='screenshot search result',
@@ -560,6 +563,7 @@ def test_the_search_field_is_displayed(driver):
             home_page.search_page().is_displayed()
         except NoSuchElementException:
             return True
+        return None
 
 
 # @allure.feature('Home page')
