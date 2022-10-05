@@ -2,6 +2,8 @@ from .base_page import BasePage
 from ..pages.locators import home_psge_locators as loc
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
 
 class HomePage(BasePage):
@@ -59,6 +61,9 @@ class HomePage(BasePage):
 
     def currency_exchange_rate(self):
         return self.find_element(loc.currency_exchange_rate_link)
+
+    def currency_exchange_rate_click(self):
+        return self.driver_wait(loc.currency_exchange_rate_link, time=5).click()
 
     def weather_link(self):
         return self.find_element(loc.weather)
