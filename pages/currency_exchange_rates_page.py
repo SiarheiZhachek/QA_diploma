@@ -1,6 +1,6 @@
-from .base_page import BasePage
-from ..pages.locators import currency_exchange_rates_page_locators as loc
-from selenium.webdriver.support.ui import Select
+from pages.base_page import BasePage
+from pages.locators import currency_exchange_rates_page_locators as loc
+from pages.base_page import int_value_from_ru_month
 
 
 class CurrencyExchange(BasePage):
@@ -27,7 +27,7 @@ class CurrencyExchange(BasePage):
         return self.find_element(loc.type_of_input_currency)
 
     def selected_usd(self):
-        return self.select(loc.currency_convertor_panel).select_by_value('usd')
+        return self.select(loc.type_of_input_currency).select_by_value('usd')
 
     def type_of_input_currency_select_usd(self):
         return self.find_element(loc.currency_in_usd)
@@ -68,20 +68,20 @@ class CurrencyExchange(BasePage):
     def selected_out_usd(self):
         return self.select(loc.type_currency_out).select_by_value('usd')
 
-    def nbrb_course(self):
+    def exchange_rate_nbrb(self):
         return self.find_element(loc.nbrb_course)
 
-    def course_calculation_nbrb(self):
-        return self.find_element(loc.course_calculation_nbrb)
+    def exchange_rate_calculation_nbrb(self):
+        return self.find_element(loc.exchange_rate_calculation_nbrb)
 
-    def course_nbrb_text(self):
-        return self.find_element(loc.course_nbrb_text)
+    def exchange_rate_nbrb_text(self):
+        return self.find_element(loc.exchange_rate_nbrb_text)
 
-    def the_best_course_in_the_converter(self):
-        return self.find_element(loc.the_best_course_in_the_converter)
+    def the_best_exchange_rate_in_the_converter(self):
+        return self.find_element(loc.the_best_exchange_rate_in_the_converter)
 
-    def the_best_course(self):
-        return self.find_element(loc.the_best_course)
+    def the_best_exchange_rate(self):
+        return self.find_element(loc.the_best_exchange_rate)
 
     def estimated_mount(self):
         return self.find_element(loc.estimated_mount)
@@ -89,8 +89,8 @@ class CurrencyExchange(BasePage):
     def the_best_exchange_rates_line(self):
         return self.find_element(loc.the_best_exchange_rates_line)
 
-    def information_about_updating_courses(self):
-        return self.find_element(loc.information_about_updating_courses)
+    def information_about_updating_exchange_rate(self):
+        return self.find_element(loc.information_about_updating_exchange_rate)
 
     def date_is_displayed(self):
         return self.find_element(loc.date).is_displayed()
@@ -100,8 +100,7 @@ class CurrencyExchange(BasePage):
 
     def date(self):
         date = self.find_element(loc.date).text
-
-        return self.int_value_from_ru_month(date)
+        return int_value_from_ru_month(date)
 
     def the_bank_buys_text(self):
         return self.find_element(loc.the_bank_buys).text
@@ -109,8 +108,8 @@ class CurrencyExchange(BasePage):
     def the_bank_sells_text(self):
         return self.find_element(loc.the_bank_sells).text
 
-    def the_nbrb_course_text(self):
-        return self.find_element(loc.nbrb_course_text).text
+    def the_nbrb_exchange_rate_text(self):
+        return self.find_element(loc.nbrb_exchange_rate_text).text
 
     def exchange_rate_fluctuations_text(self):
         return self.find_element(loc.exchange_rate_fluctuations).text
@@ -136,7 +135,7 @@ class CurrencyExchange(BasePage):
     def one_usd(self):
         return self.find_elements(loc.information_panel_attribute)[0]
 
-    def bank_by_one_usd(self):
+    def bank_buy_one_usd(self):
         return self.find_elements(loc.information_panel_attribute)[1]
 
     def bank_sell_one_usd(self):
@@ -148,7 +147,7 @@ class CurrencyExchange(BasePage):
     def one_eur(self):
         return self.find_elements(loc.information_panel_attribute)[4]
 
-    def bank_by_one_eur(self):
+    def bank_buy_one_eur(self):
         return self.find_elements(loc.information_panel_attribute)[5]
 
     def bank_sell_one_eur(self):
@@ -160,7 +159,7 @@ class CurrencyExchange(BasePage):
     def one_hundred_rub(self):
         return self.find_elements(loc.information_panel_attribute)[8]
 
-    def bank_by_one_hundred_rub(self):
+    def bank_buy_one_hundred_rub(self):
         return self.find_elements(loc.information_panel_attribute)[9]
 
     def bank_sell_one_hundred_rub(self):
@@ -172,7 +171,7 @@ class CurrencyExchange(BasePage):
     def cross_course_eur_usd(self):
         return self.find_elements(loc.information_panel_attribute)[12]
 
-    def bank_by_eur_usd(self):
+    def bank_buy_eur_usd(self):
         return self.find_elements(loc.information_panel_attribute)[13]
 
     def bank_sell_eur_usd(self):
@@ -181,10 +180,10 @@ class CurrencyExchange(BasePage):
     def nbrb_rate_eur_usd(self):
         return self.find_elements(loc.information_panel_attribute)[15]
 
-    def cross_course_eur_rub(self):
+    def cross_exchange_rate_eur_rub(self):
         return self.find_elements(loc.information_panel_attribute)[16]
 
-    def bank_by_eur_rub(self):
+    def bank_buy_eur_rub(self):
         return self.find_elements(loc.information_panel_attribute)[17]
 
     def bank_sell_eur_rub(self):
@@ -193,10 +192,10 @@ class CurrencyExchange(BasePage):
     def nbrb_rate_eur_rub(self):
         return self.find_elements(loc.information_panel_attribute)[19]
 
-    def cross_course_usd_rub(self):
+    def cross_exchange_rate_usd_rub(self):
         return self.find_elements(loc.information_panel_attribute)[20]
 
-    def bank_by_usd_rub(self):
+    def bank_buy_usd_rub(self):
         return self.find_elements(loc.information_panel_attribute)[21]
 
     def bank_sell_usd_rub(self):
@@ -205,7 +204,122 @@ class CurrencyExchange(BasePage):
     def nbrb_rate_usd_rub(self):
         return self.find_elements(loc.information_panel_attribute)[23]
 
+    def exchange_rate_in_other_banks_usd(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[0]
+        return self.move_to_element(element).click().perform()
 
+    def banks(self):
+        return self.find_elements(loc.banks)
 
+    def exchange_rate_in_banks_buy_usd(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[1]
 
+    def map_is_displayed(self):
+        return self.find_element(loc.maps).is_displayed()
 
+    def exchange_rate_in_banks_sell_usd(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[2]
+
+    def exchange_rate_in_other_banks_eur(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[3]
+        return self.move_to_element(element).click().perform()
+
+    def exchange_rate_in_banks_buy_eur(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[4]
+
+    def exchange_rate_in_banks_sell_eur(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[5]
+
+    def exchange_rate_in_other_banks_rub(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[6]
+        return self.move_to_element(element).click().perform()
+
+    def exchange_rate_in_banks_buy_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[7]
+
+    def exchange_rate_in_banks_sell_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[8]
+
+    def exchange_rate_in_other_banks_cross_course_eur_usd(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[9]
+        return self.move_to_element(element).click().perform()
+
+    def exchange_rate_in_banks_buy_cross_course_eur_usd(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[10]
+
+    def exchange_rate_in_banks_sell_cross_course_eur_usd(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[11]
+
+    def exchange_rate_in_other_banks_cross_course_eur_rub(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[12]
+        return self.move_to_element(element).click().perform()
+
+    def exchange_rate_in_banks_buy_cross_course_eur_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[13]
+
+    def exchange_rate_in_banks_sell_cross_course_eur_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[14]
+
+    def exchange_rate_in_other_banks_cross_course_usd_rub(self):
+        element = self.find_elements(loc.exchange_rate_in_banks)[15]
+        return self.move_to_element(element).click().perform()
+
+    def exchange_rate_in_banks_buy_cross_course_usd_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[16]
+
+    def exchange_rate_in_banks_sell_cross_course_usd_rub(self):
+        return self.find_elements(loc.exchange_rate_in_banks)[17]
+
+    def button_fluctuations_in_the_best_rates_usd_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[1]
+
+    def button_fluctuations_in_the_best_rates_usd_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[2]
+
+    def button_fluctuations_in_the_best_rates_usd_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[0]
+
+    def button_fluctuations_in_the_best_rates_eur_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[4]
+
+    def button_fluctuations_in_the_best_rates_eur_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[5]
+
+    def button_fluctuations_in_the_best_rates_eur_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[3]
+
+    def button_fluctuations_in_the_best_rates_rub_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[7]
+
+    def button_fluctuations_in_the_best_rates_rub_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[8]
+
+    def button_fluctuations_in_the_best_rates_rub_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[6]
+
+    def button_fluctuations_in_the_best_rates_eur_usd_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[10]
+
+    def button_fluctuations_in_the_best_rates_eur_usd_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[11]
+
+    def button_fluctuations_in_the_best_rates_eur_usd_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[9]
+
+    def button_fluctuations_in_the_best_rates_eur_rub_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[13]
+
+    def button_fluctuations_in_the_best_rates_eur_rub_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[14]
+
+    def button_fluctuations_in_the_best_rates_eur_rub_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[12]
+
+    def button_fluctuations_in_the_best_rates_usd_rub_sell(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[16]
+
+    def button_fluctuations_in_the_best_rates_usd_rub_nbrb(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[17]
+
+    def button_fluctuations_in_the_best_rates_usd_rub_buy(self):
+        return self.find_elements(loc.button_fluctuations_in_the_best_rates)[15]

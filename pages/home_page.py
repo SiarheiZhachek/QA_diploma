@@ -1,7 +1,5 @@
-from .base_page import BasePage
-from ..pages.locators import home_psge_locators as loc
-from selenium.webdriver.common.action_chains import ActionChains
-from selenium.webdriver.common.keys import Keys
+from pages.base_page import BasePage
+from pages.locators import home_psge_locators as loc
 
 
 class HomePage(BasePage):
@@ -34,31 +32,34 @@ class HomePage(BasePage):
         return self.find_element(loc.project_navigation_flex)
 
     def catalog_button(self):
-        return self.find_element(loc.catalog_button)
+        return self.find_elements(loc.main_navigator_button)[0]
 
     def news_button(self):
-        return self.find_element(loc.news_button)
+        return self.find_elements(loc.main_navigator_button)[1]
 
     def car_market_button(self):
-        return self.find_element(loc.car_market_button)
+        return self.find_elements(loc.main_navigator_button)[2]
 
     def houses_and_apartments_button(self):
-        return self.find_element(loc.houses_and_apartments_button)
+        return self.find_elements(loc.main_navigator_button)[3]
 
     def services_button(self):
-        return self.find_element(loc.services_button)
+        return self.find_elements(loc.main_navigator_button)[4]
 
     def flea_market_button(self):
-        return self.find_element(loc.flea_market_button)
+        return self.find_elements(loc.main_navigator_button)[5]
 
     def forum_button(self):
-        return self.find_element(loc.forum_button)
+        return self.find_elements(loc.main_navigator_button)[6]
 
     def making_a_credit_card(self):
         return self.find_element(loc.credit_card_button)
 
     def currency_exchange_rate(self):
         return self.find_element(loc.currency_exchange_rate_link)
+
+    def currency_exchange_rate_click(self):
+        return self.driver_wait(loc.currency_exchange_rate_link, time=5).click()
 
     def weather_link(self):
         return self.find_element(loc.weather)
