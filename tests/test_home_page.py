@@ -1,8 +1,8 @@
 import requests
 import allure
-from pages.home_page import HomePage
 from allure_commons.types import AttachmentType
 from selenium.common.exceptions import NoSuchElementException
+from pages.home_page import HomePage
 
 
 @allure.feature('Home page')

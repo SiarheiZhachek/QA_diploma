@@ -1,5 +1,4 @@
-domain = 'https://www.onliner.by/'
-domain_nbrb = 'https://www.nbrb.by/api/exrates/rates/431'
+DOMAIN = 'https://www.onliner.by/'
 RU_MONTH_VALUES = {
     'января': 1,
     'февраля': 2,

@@ -6,22 +6,9 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import settings
 
-RU_MONTH_VALUES = {
-    'января': 1,
-    'февраля': 2,
-    'марта': 3,
-    'апреля': 4,
-    'мая': 5,
-    'июня': 6,
-    'июля': 7,
-    'августа': 8,
-    'сентября': 9,
-    'октября': 10,
-    'ноября': 11,
-    'декабря': 12,
-}
+
 def int_value_from_ru_month(date_str):
-    month = RU_MONTH_VALUES
+    month = settings.RU_MONTH_VALUES
     for key, value in month.items():
         date_str = date_str.replace(key, str(value))
     return date_str
@@ -30,8 +17,8 @@ def int_value_from_ru_month(date_str):
 class BasePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
-        self.domain = settings.domain
-        self.domain_nbrb = settings.domain_nbrb
+        self.domain = settings.DOMAIN
+        # self.domain_nbrb = settings.domain_nbrb
 
     def find_element(self, *args):
         element, value = args[0]
