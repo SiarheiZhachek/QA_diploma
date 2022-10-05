@@ -347,9 +347,9 @@ def test_currency_exchange_rate_is_displayed_and_click(driver):
 @allure.feature('Home page')
 @allure.story('Currency exchange')
 def test_currency_exchange_rate_displayed_correctly(domain, driver):
-    with allure.step('getting the national bank rate'):
+    with allure.step('Getting the national bank rate'):
         response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
-        dollar_exchange_rate = response['Cur_OfficialRate']
+        exchange_rate_dollar = response['Cur_OfficialRate']
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -357,7 +357,7 @@ def test_currency_exchange_rate_displayed_correctly(domain, driver):
     str_exchange_rate = exchange_rate.replace(',', '.')
     str_exchange_rate = str_exchange_rate.replace('$', '')
     str_exchange_rate = float(str_exchange_rate)
-    assert str_exchange_rate == dollar_exchange_rate
+    assert str_exchange_rate == exchange_rate_dollar
 
 
 @allure.feature('Home page')
