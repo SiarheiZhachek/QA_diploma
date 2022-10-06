@@ -8,7 +8,7 @@ from pages.currency_exchange_rates_page import CurrencyExchange
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_currency_convertor_panel_is_displayed(driver):
+def test_currency_convertor_panel_is_displayed_and_has_the_text(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -21,22 +21,9 @@ def test_currency_convertor_panel_is_displayed(driver):
     )
 
 
-# @allure.feature('Currency exchange page')
-# @allure.story('Currency convertor panel')
-# def test_currency_convertor_panel_text(driver):
-#     with allure.step('Open home page'):
-#         home_page = HomePage(driver)
-#         home_page.open()
-#     with allure.step('Open currency exchange page'):
-#         home_page.currency_exchange_rate_click()
-#         currency_exchange = CurrencyExchange(driver)
-#     assert currency_exchange.currency_convertor_panel_text().text ==
-#     'Конвертер валют по лучшим курсам'
-
-
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_to_sell_button_is_displayed(driver):
+def test_to_sell_button_is_displayed_and_has_the_text(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -47,21 +34,9 @@ def test_to_sell_button_is_displayed(driver):
     assert currency_exchange.to_sell_button().text == 'Продать'
 
 
-# @allure.feature('Currency exchange page')
-# @allure.story('Currency convertor panel')
-# def test_to_sell_button_text(driver):
-#     with allure.step('Open home page'):
-#         home_page = HomePage(driver)
-#         home_page.open()
-#     with allure.step('Open currency exchange page'):
-#         home_page.currency_exchange_rate_click()
-#         currency_exchange = CurrencyExchange(driver)
-#     assert currency_exchange.to_sell_button().text == 'Продать'
-
-
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_buy_button_is_displayed(driver):
+def test_buy_button_is_displayed_and_has_the_text(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -70,18 +45,6 @@ def test_buy_button_is_displayed(driver):
         currency_exchange = CurrencyExchange(driver)
     assert currency_exchange.buy_button().is_displayed()
     assert currency_exchange.buy_button().text == 'Купить'
-
-
-# @allure.feature('Currency exchange page')
-# @allure.story('Currency convertor panel')
-# def test_buy_button_text(driver):
-#     with allure.step('Open home page'):
-#         home_page = HomePage(driver)
-#         home_page.open()
-#     with allure.step('Open currency exchange page'):
-#         home_page.currency_exchange_rate_click()
-#         currency_exchange = CurrencyExchange(driver)
-#     assert currency_exchange.buy_button().text == 'Купить'
 
 
 @allure.feature('Currency exchange page')
@@ -124,7 +87,6 @@ def test_amount_input_field_is_displayed(driver):
         currency_exchange = CurrencyExchange(driver)
     assert currency_exchange.amount_input_field().is_displayed()
 
-#
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
@@ -140,7 +102,7 @@ def test_type_of_input_currency_is_displayed(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_euro(driver):
+def test_select_euro_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -154,7 +116,7 @@ def test_select_euro(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_rub(driver):
+def test_select_rub_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -168,7 +130,7 @@ def test_select_rub(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_byn(driver):
+def test_select_byn_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -182,7 +144,7 @@ def test_select_byn(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_usd(driver):
+def test_select_usd_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -198,7 +160,7 @@ def test_select_usd(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_out_eur(driver):
+def test_select_out_eur_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -213,7 +175,7 @@ def test_select_out_eur(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_out_rub(driver):
+def test_select_out_rub_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -227,7 +189,7 @@ def test_select_out_rub(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_out_byn(driver):
+def test_select_out_byn_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -241,7 +203,7 @@ def test_select_out_byn(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
-def test_select_out_usd(driver):
+def test_select_out_usd_in_convertor_panel(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -1653,26 +1615,6 @@ def test_button_fluctuations_in_the_best_rates_usd_enabled(driver):
     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_buy().is_enabled()
 
 
-# def test_button_fluctuations_in_the_best_rates_usd_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_nbrb().is_enabled()
-#
-#
-#
-# def test_button_fluctuations_in_the_best_rates_usd_by_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_by().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_by().is_enabled()
-
-
 @allure.feature('Currency exchange page')
 @allure.story('Fluctuations in the best rates')
 def test_button_fluctuations_in_the_best_rates_eur_enabled(driver):
@@ -1691,25 +1633,6 @@ def test_button_fluctuations_in_the_best_rates_eur_enabled(driver):
     with allure.step('In the Fluctuations of the best rates section EUR, click buy'):
         currency_exchange.button_fluctuations_in_the_best_rates_eur_buy().click()
     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_buy().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_eur_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_nbrb().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_eur_by_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_by().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_by().is_enabled()
 
 
 @allure.feature('Currency exchange page')
@@ -1732,25 +1655,6 @@ def test_button_fluctuations_in_the_best_rates_rub_enabled(driver):
     assert currency_exchange.button_fluctuations_in_the_best_rates_rub_buy().is_enabled()
 
 
-# def test_button_fluctuations_in_the_best_rates_rub_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_rub_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_rub_nbrb().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_rub_buy_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_rub_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_rub_by().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_rub_by().is_enabled()
-
-
 @allure.feature('Currency exchange page')
 @allure.story('Fluctuations in the best rates')
 def test_button_fluctuations_in_the_best_rates_rub_eur_usd_enabled(driver):
@@ -1769,25 +1673,6 @@ def test_button_fluctuations_in_the_best_rates_rub_eur_usd_enabled(driver):
     with allure.step('In the Fluctuations of the best rates section EUR/USD, click buy'):
         currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_buy().click()
     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_buy().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_eur_usd_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_nbrb().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_eur_usd_buy_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_buy().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_usd_buy().is_enabled()
 
 
 @allure.feature('Currency exchange page')
@@ -1810,25 +1695,6 @@ def test_button_fluctuations_in_the_best_rates_eur_rub_enabled(driver):
     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_buy().is_enabled()
 
 
-# def test_button_fluctuations_in_the_best_rates_eur_rub_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_nbrb().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_eur_rub_by_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_buy().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_eur_rub_buy().is_enabled()
-
-
 @allure.feature('Currency exchange page')
 @allure.story('Fluctuations in the best rates')
 def test_button_fluctuations_in_the_best_rates_rub_usd_rub_enabled(driver):
@@ -1847,22 +1713,3 @@ def test_button_fluctuations_in_the_best_rates_rub_usd_rub_enabled(driver):
     with allure.step('In the Fluctuations of the best rates section EUR/RUB, click buy'):
         currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().click()
     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_usd_rub_nbrb_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_nbrb().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_nbrb().is_enabled()
-
-
-# def test_button_fluctuations_in_the_best_rates_usd_rub_by_enabled(driver):
-#     home_page = HomePage(driver)
-#     home_page.open()
-#     home_page.currency_exchange_rate_click()
-#     currency_exchange = CurrencyExchange(driver)
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_sell().click()
-#     currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().click()
-#     assert currency_exchange.button_fluctuations_in_the_best_rates_usd_rub_buy().is_enabled()
