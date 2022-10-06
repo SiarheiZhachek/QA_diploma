@@ -17,7 +17,7 @@ iframe_search_field = (By.XPATH, '//div[@id="fast-search-modal"]/div/div/iframe'
 search_page = (By.CLASS_NAME, 'search-page')
 search_result = (By.CLASS_NAME, 'result__item_product')
 search_field_close = (By.CLASS_NAME, 'search__close')
-search_bar = (By.XPATH, '//*[@id="search-page"]/div[1]/div[1]')
+search_bar = (By.XPATH, '//*[@id="search-page"]/div[1]')
 cart = (By.CSS_SELECTOR, 'a[title="Корзина"]')
 google_account_link = (By.XPATH, '//*[@id="userbar"]/div[1]/div/div/div[4]')
 vk_account_link = (By.CSS_SELECTOR, 'div[title="ВКонтакте"]')
