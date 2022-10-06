@@ -245,7 +245,7 @@ class CurrencyExchange(BasePage):
         return self.move_to_element(element).click().perform()
 
     def banks(self):
-        self.find_elements(loc.banks)
+        return self.find_elements(loc.banks)
 
     def exchange_rate_in_banks_buy_usd_click(self):
         return self.find_elements(loc.exchange_rate_in_banks)[1].click()

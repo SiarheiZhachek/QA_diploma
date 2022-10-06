@@ -1,5 +1,5 @@
 from pages.base_page import BasePage
-from pages.locators import home_psge_locators as loc
+from pages.locators import home_page_locators as loc
 
 
 class HomePage(BasePage):
