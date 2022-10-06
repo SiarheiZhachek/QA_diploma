@@ -1322,7 +1322,7 @@ def test_exchange_rate_in_other_banks_usd(driver):
         currency_exchange.exchange_rate_in_other_banks_usd()
         driver.execute_script("window.scrollTo(document.body.scrollHeight, 500);")
         count = 0
-        for _ in 'currency_exchange.banks()':
+        for _ in currency_exchange.banks():
             if len(currency_exchange.banks()) >= 1:
                 count += 1
     assert count >= 1
