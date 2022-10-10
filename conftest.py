@@ -1,7 +1,6 @@
 import pytest
 from selenium import webdriver
-
-DOMAIN_NBRB = 'https://www.nbrb.by/'
+import settings
 
 
 @pytest.fixture(scope='function')
@@ -15,4 +14,4 @@ def driver():
 
 @pytest.fixture(scope='function')
 def domain():
-    yield DOMAIN_NBRB
+    yield settings.DOMAIN_NBRB

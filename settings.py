@@ -13,3 +13,4 @@ RU_MONTH_VALUES = {
     'ноября': 11,
     'декабря': 12,
 }
+DOMAIN_NBRB = 'https://www.nbrb.by/'

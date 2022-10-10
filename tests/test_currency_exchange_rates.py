@@ -1161,7 +1161,9 @@ def test_nbrb_rate_hundred_rub(domain, driver):
         currency_exchange = CurrencyExchange(driver)
         rate_nbrb = currency_exchange.nbrb_rate_one_hundred_rub.text
         rate_nbrb = rate_nbrb.replace(',', '.')
-    assert rate_nbrb == f'{rub_exchange_rate}'
+        rate_nbrb = float(rate_nbrb)
+        rate_nbrb = float(f'{rate_nbrb:.4f}')
+    assert rate_nbrb == rub_exchange_rate
 
 
 @allure.feature('Currency exchange page')
