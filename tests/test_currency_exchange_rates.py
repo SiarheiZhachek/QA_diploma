@@ -1312,7 +1312,6 @@ def test_nbrb_rate_usd_rub_is_displayed(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('USD exchange rate field')
-@pytest.mark.skip('a very long test')
 def test_exchange_rate_in_other_banks_usd(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
@@ -1360,7 +1359,6 @@ def test_exchange_rate_in_banks_sell_usd_open_map(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('EUR exchange rate field')
-@pytest.mark.skip('a very long test')
 def test_exchange_rate_in_other_banks_eur(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
@@ -1408,7 +1406,6 @@ def test_exchange_rate_in_banks_sell_eur_open_map(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('RUB exchange rate field')
-@pytest.mark.skip('a very long test')
 def test_exchange_rate_in_other_banks_rub(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
@@ -1456,8 +1453,7 @@ def test_exchange_rate_in_banks_sell_rub_open_map(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('EUR/USD exchange rate field')
-@pytest.mark.skip('a very long test')
-def test_echange_rate_in_other_banks_cross_course_eur_usd(driver):
+def test_exchange_rate_in_other_banks_cross_course_eur_usd(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -1504,7 +1500,6 @@ def test_exchange_rate_in_banks_sell_cross_course_eur_usd_open_map(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('EUR/RUB exchange rate field')
-@pytest.mark.skip('a very long test')
 def test_echange_rate_in_other_banks_cross_course_eur_rub(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
@@ -1552,8 +1547,7 @@ def test_exchange_rate_in_banks_sell_cross_course_eur_rub_open_map(driver):
 
 @allure.feature('Currency exchange page')
 @allure.story('USD/RUB exchange rate field')
-@pytest.mark.skip('a very long test')
-def test_echange_rate_in_other_banks_cross_course_usd_rub(driver):
+def test_exchange_rate_in_other_banks_cross_course_usd_rub(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
