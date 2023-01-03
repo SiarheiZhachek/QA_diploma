@@ -7,7 +7,7 @@ from pages.home_page import HomePage
 
 @allure.feature('Home page')
 @allure.story('Open site')
-def test_home_pape_open(driver):
+def test_home_page_open(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
