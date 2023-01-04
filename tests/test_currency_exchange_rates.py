@@ -220,9 +220,6 @@ def test_select_out_usd_in_convertor_panel(driver):
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
 def test_nbrb_usd_exchange_rate_convertor_panel(domain, driver):
-    with allure.step("getting the National Bank's API of the usd exchange rate"):
-        response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
-        dollar_exchange_rate = response['Cur_OfficialRate']
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -231,15 +228,14 @@ def test_nbrb_usd_exchange_rate_convertor_panel(domain, driver):
         currency_exchange = CurrencyExchange(driver)
     exchange_rate = currency_exchange.exchange_rate_nbrb.text
     str_exchange_rate = exchange_rate.replace(',', '.')
+    with allure.step("Getting the National Bank's API of the usd exchange rate"):
+        dollar_exchange_rate = currency_exchange.get_api_nbrb_usd_method()
     assert float(str_exchange_rate) == dollar_exchange_rate
 
 
 @allure.feature('Currency exchange page')
 @allure.story('Currency convertor panel')
 def test_nbrb_eur_exchange_rate_convertor_panel(domain, driver):
-    with allure.step("getting the National Bank's API of the eur exchange rate"):
-        response = requests.request('GET', f'{domain}api/exrates/rates/EUR?parammode=2').json()
-        euro_exchange_rate = response['Cur_OfficialRate']
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
@@ -250,6 +246,8 @@ def test_nbrb_eur_exchange_rate_convertor_panel(domain, driver):
         currency_exchange.selected_eur()
     exchange_rate = currency_exchange.exchange_rate_nbrb.text
     str_exchange_rate = exchange_rate.replace(',', '.')
+    with allure.step("Getting the National Bank's API of the eur exchange rate"):
+        euro_exchange_rate = currency_exchange.get_api_nbrb_eur_method()
     assert str_exchange_rate == f'{euro_exchange_rate}'
 
 
@@ -257,17 +255,16 @@ def test_nbrb_eur_exchange_rate_convertor_panel(domain, driver):
 @allure.story('Currency convertor panel')
 @pytest.mark.parametrize('the_amount', [1, 100000, 99900000000])
 def test_correct_exchange_rate_calculation_nbrb_usd_convertor_panel(domain, the_amount, driver):
-    with allure.step("getting the National Bank's API of the usd exchange rate"):
-        response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
-        dollar_exchange_rate = response['Cur_OfficialRate']
-        correct_result = the_amount * dollar_exchange_rate
-        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
     with allure.step('Open currency exchange page'):
         home_page.currency_exchange_rate_click()
         currency_exchange = CurrencyExchange(driver)
+    with allure.step("Getting the National Bank's API of the usd exchange rate"):
+        dollar_exchange_rate = currency_exchange.get_api_nbrb_usd_method()
+        correct_result = the_amount * dollar_exchange_rate
+        result = float(f'{correct_result:.2f}')
     with allure.step('Amount input field clear'):
         currency_exchange.amount_input_field.clear()
     with allure.step('Enter the amount'):
@@ -283,17 +280,16 @@ def test_correct_exchange_rate_calculation_nbrb_usd_convertor_panel(domain, the_
 @allure.story('Currency convertor panel')
 @pytest.mark.parametrize('the_amount', [1, 100000, 99900000000])
 def test_correct_exchange_rate_calculation_nbrb_eur_convertor_panel(domain, the_amount, driver):
-    with allure.step("Getting the National Bank's API of the eur exchange rate"):
-        response = requests.request('GET', f'{domain}api/exrates/rates/EUR?parammode=2').json()
-        euro_exchange_rate = response['Cur_OfficialRate']
-        correct_result = euro_exchange_rate * the_amount
-        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
     with allure.step('Open currency exchange page'):
         home_page.currency_exchange_rate_click()
         currency_exchange = CurrencyExchange(driver)
+    with allure.step("Getting the National Bank's API of the eur exchange rate"):
+        euro_exchange_rate = currency_exchange.get_api_nbrb_eur_method()
+        correct_result = euro_exchange_rate * the_amount
+        result = float(f'{correct_result:.2f}')
     with allure.step('Amount input field clear'):
         currency_exchange.amount_input_field.clear()
     with allure.step('Selected usd in currency convertor panel'):
@@ -311,17 +307,16 @@ def test_correct_exchange_rate_calculation_nbrb_eur_convertor_panel(domain, the_
 @allure.story('Currency convertor panel')
 @pytest.mark.parametrize('the_amount', [1, 100000, 99900000000])
 def test_correct_exchange_rate_calculation_nbrb_rub_convertor_panel(domain, the_amount, driver):
-    with allure.step("getting the National Bank's API of the rub exchange rate"):
-        response = requests.request('GET', f'{domain}api/exrates/rates/RUB?parammode=2').json()
-        rub_exchange_rate = response['Cur_OfficialRate']
-        correct_result = (the_amount * rub_exchange_rate) / 100
-        result = float(f'{correct_result:.2f}')
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
     with allure.step('Open currency exchange page'):
         home_page.currency_exchange_rate_click()
         currency_exchange = CurrencyExchange(driver)
+    with allure.step("getting the National Bank's API of the rub exchange rate"):
+        rub_exchange_rate = currency_exchange.get_api_nbrb_rus_rub()
+        correct_result = (the_amount * rub_exchange_rate) / 100
+        result = float(f'{correct_result:.2f}')
     with allure.step('Amount input field clear'):
         currency_exchange.amount_input_field.clear()
     with allure.step('Selected rub in currency convertor panel'):

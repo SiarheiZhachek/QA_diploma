@@ -5,6 +5,15 @@ from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 import settings
+import requests
+import json
+
+
+# def get_api_usd_method():
+#     response = requests.request('GET', 'https://www.nbrb.by/api/exrates/rates/431').json()
+#     dollar_exchange_rate = response['Cur_OfficialRate']
+#     return dollar_exchange_rate
+
 
 
 def int_value_from_ru_month(date_str):
@@ -18,7 +27,7 @@ class BasePage:
     def __init__(self, driver: WebDriver):
         self.driver = driver
         self.domain = settings.DOMAIN
-        # self.domain_nbrb = settings.domain_nbrb
+        self.domain_nbrb = settings.DOMAIN_NBRB
 
     def find_element(self, *args):
         element, value = args[0]
@@ -44,3 +53,24 @@ class BasePage:
 
     def driver_wait(self, locator, time=10):
         return WebDriverWait(self.driver, time).until(EC.element_to_be_clickable(locator))
+
+    def get_api_nbrb_usd_method(self):
+        response = requests.request(
+            'GET', f'{self.domain_nbrb}api/exrates/rates/431'
+        ).json()
+        dollar_exchange_rate = response['Cur_OfficialRate']
+        return dollar_exchange_rate
+
+    def get_api_nbrb_eur_method(self):
+        response = requests.request(
+            'GET', f'{self.domain_nbrb}api/exrates/rates/EUR?parammode=2'
+        ).json()
+        euro_exchange_rate = response['Cur_OfficialRate']
+        return euro_exchange_rate
+
+    def get_api_nbrb_rus_rub(self):
+        response = requests.request(
+            'GET', f'{self.domain_nbrb}api/exrates/rates/RUB?parammode=2'
+        ).json()
+        rub_exchange_rate = response['Cur_OfficialRate']
+        return rub_exchange_rate
