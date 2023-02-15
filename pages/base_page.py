@@ -3,17 +3,9 @@ from selenium.webdriver.chrome.webdriver import WebDriver
 from selenium.webdriver.common.action_chains import ActionChains
 from selenium.webdriver.support.ui import Select
 from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support import expected_conditions as ec
 import settings
 import requests
-import json
-
-
-# def get_api_usd_method():
-#     response = requests.request('GET', 'https://www.nbrb.by/api/exrates/rates/431').json()
-#     dollar_exchange_rate = response['Cur_OfficialRate']
-#     return dollar_exchange_rate
-
 
 
 def int_value_from_ru_month(date_str):
@@ -52,7 +44,7 @@ class BasePage:
         return Select(self.driver.find_element(element, value))
 
     def driver_wait(self, locator, time=10):
-        return WebDriverWait(self.driver, time).until(EC.element_to_be_clickable(locator))
+        return WebDriverWait(self.driver, time).until(ec.element_to_be_clickable(locator))
 
     def get_api_nbrb_usd_method(self):
         response = requests.request(
