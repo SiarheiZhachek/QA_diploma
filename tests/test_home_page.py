@@ -1,4 +1,3 @@
-import requests
 import allure
 from allure_commons.types import AttachmentType
 from selenium.common.exceptions import NoSuchElementException
@@ -180,13 +179,12 @@ def test_currency_exchange_rate_is_displayed_and_click(driver):
 
 @allure.feature('Home page')
 @allure.story('Currency exchange')
-def test_currency_exchange_rate_displayed_correctly(domain, driver):
-    with allure.step('Getting the national bank rate'):
-        response = requests.request('GET', f'{domain}api/exrates/rates/431').json()
-        exchange_rate_dollar = response['Cur_OfficialRate']
+def test_currency_exchange_rate_displayed_correctly(driver):
     with allure.step('Open home page'):
         home_page = HomePage(driver)
         home_page.open()
+    with allure.step('Getting the national bank rate'):
+        exchange_rate_dollar = home_page.get_api_nbrb_usd_method()
     exchange_rate = home_page.currency_exchange_rate.text
     str_exchange_rate = exchange_rate.replace(',', '.')
     str_exchange_rate = str_exchange_rate.replace('$', '')
