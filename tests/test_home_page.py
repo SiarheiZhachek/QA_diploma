@@ -11,7 +11,7 @@ def test_home_page_open(driver):
         home_page = HomePage(driver)
         home_page.open()
     assert home_page.home_page_url() == 'https://www.onliner.by/'
-    assert home_page.home_page_title() == 'Onliner'
+    assert home_page.home_page_title() == 'Onlíner'
 
 
 @allure.feature('Home page')
