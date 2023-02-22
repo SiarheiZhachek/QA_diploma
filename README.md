@@ -3,7 +3,7 @@
 To run tests:
 
 1. Copy the repository via SSH.
-2. Download chromedriver for your operating system and the appropriate version and put it in the PATH variable.
+2. Download chromedriver or geckodriver for your operating system and the appropriate version and put it in the PATH variable.
 3. Create a virtual environment and log in to it(Windows: python -m venv venv, venv/Scripts/activate;
 Linux: python3 -m venv venv, source venv/bin/activate)
 4. Download all modules to the virtual environment (pip3 install -r requirements.txt)
@@ -17,5 +17,6 @@ OpenJDK installation documentation
     Windows: https://learn.microsoft.com/ru-ru/java/openjdk/download
 https://docs.oracle.com/cd/E19182-01/820-7851/inst_cli_jdk_javahome_t/
     Linux: sudo apt install default-jre -y
-6. The tests are run by the command pytest -v --alluredir=../report
-7. View allure report allure serve ../reports
+6. The tests are run by the command: pytest -v --alluredir=../report
+7. To run tests in Firefox, you need to specify the option --browser firefox, by default used Chrome.
+8. View allure report: allure serve ../reports
