@@ -25,3 +25,6 @@ class HomePage(BasePage):
 
     def search_bar_iframe_is_displayed(self):
         return self.search_bar_iframe.is_displayed()
+
+    def info_title_a_credit_card_is_displayed(self):
+        return self.find_element(loc.info_title_a_credit_card).is_displayed()

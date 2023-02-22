@@ -2,6 +2,7 @@ import allure
 from allure_commons.types import AttachmentType
 from selenium.common.exceptions import NoSuchElementException
 from pages.home_page import HomePage
+from time import sleep
 
 
 @allure.feature('Home page')
@@ -158,6 +159,7 @@ def test_making_a_credit_card_button_is_displayed(driver):
         home_page.making_a_credit_card.click()
     with allure.step('Switch windows'):
         driver.switch_to.window(driver.window_handles[1])
+    assert home_page.info_title_a_credit_card_is_displayed()
     assert driver.title == 'Onliner Клевер – 5% возврата на всё в Каталоге'
     with allure.step('Close second windows'):
         driver.close()
