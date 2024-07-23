@@ -67,7 +67,7 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: run tests
-        run: pytest tests/test_home_page.py::test_home_page_open --host=server --alluredir=reports
+        run: pytest --host=server --alluredir=reports
         continue-on-error: true
       - name: Store allure history
         uses: actions/upload-artifact@v3
