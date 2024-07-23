@@ -10,10 +10,51 @@ permissions:
 
 jobs:
 
-
+  download-history:
+    # if: false
+    runs-on: ubuntu-latest
+    name: Download history
+    steps:
+      - run: >
+          ARTIFACT_ID=$(curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          "https://api.github.com/repos/SiarheiZhachek/QA_diploma/actions/artifacts?name=reports" 
+          | python -c "import sys, json; print(json.load(sys.stdin)['artifacts'][0]['id']);")
+          &&
+          curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "Authorization: Bearer ${{ secrets.TOKEN }}" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          https://api.github.com/repos/SiarheiZhachek/QA_diploma/actions/artifacts/$ARTIFACT_ID/zip 
+          -o artifacts.zip 
+          &&
+          REPORT_ID=$(curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          "https://api.github.com/repos/SiarheiZhachek/QA_diploma/actions/artifacts?name=github-pages" 
+          | python -c "import sys, json; print(json.load(sys.stdin)['artifacts'][0]['id']);") 
+          &&
+          curl -L 
+          -H "Accept: application/vnd.github+json" 
+          -H "Authorization: Bearer ${{ secrets.TOKEN }}" 
+          -H "X-GitHub-Api-Version: 2022-11-28" 
+          https://api.github.com/repos/SiarheiZhachek/QA_diploma/actions/artifacts/$REPORT_ID/zip 
+          -o pages.zip
+      - run: mkdir reports && unzip artifacts.zip -d reports
+      - run: mkdir old_pages pages_history && unzip pages.zip -d old_pages && tar -xvf old_pages/artifact.tar -C pages_history
+      - run: cp pages_history/history/* reports && cp -r pages_history/history reports
+      - name: Store allure history
+        uses: actions/upload-artifact@v3
+        with:
+            name: allure-results
+            path:
+              reports
+            retention-days: 1
 
   test:
     runs-on: ubuntu-latest
+    needs: download-history
 
     steps:
       - name: Checkout repository
@@ -23,7 +64,7 @@ jobs:
       - name: install dependencies
         run: pip install -r requirements.txt
       - name: run tests
-        run: pytest tests/test_home_page.py::test_home_page_open --host=server --alluredir=reports
+        run: pytest --host=server --alluredir=reports
         continue-on-error: true
       - name: Store allure history
         uses: actions/upload-artifact@v3
