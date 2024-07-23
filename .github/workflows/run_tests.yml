@@ -15,6 +15,10 @@ jobs:
     runs-on: ubuntu-latest
     name: Download history
     steps:
+      - name: setup Python
+        uses: actions/setup-python@v4
+        with:
+            python-version: "3.10"
       - run: >
           ARTIFACT_ID=$(curl -L 
           -H "Accept: application/vnd.github+json" 
@@ -27,8 +31,7 @@ jobs:
           -H "Authorization: Bearer ${{ secrets.TOKEN }}" 
           -H "X-GitHub-Api-Version: 2022-11-28" 
           https://api.github.com/repos/SiarheiZhachek/QA_diploma/actions/artifacts/$ARTIFACT_ID/zip 
-          -o artifacts.zip 
-          &&
+          -o artifacts.zip &&
           REPORT_ID=$(curl -L 
           -H "Accept: application/vnd.github+json" 
           -H "X-GitHub-Api-Version: 2022-11-28" 
