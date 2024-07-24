@@ -1,7 +1,8 @@
 name: Automated tests
 
 on:
-  workflow_dispatch
+   schedule:
+    - cron: '20 9 * * *'
 
 permissions:
   contents: read
