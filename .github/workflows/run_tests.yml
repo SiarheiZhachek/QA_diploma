@@ -77,7 +77,7 @@ jobs:
           name: reports
           path:
               reports
-          retention-days: 1
+          retention-days: 2
 
   generate-report:
     runs-on: ubuntu-latest
