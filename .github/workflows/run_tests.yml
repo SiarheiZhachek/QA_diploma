@@ -14,10 +14,6 @@ jobs:
     runs-on: ubuntu-latest
     name: Download history
     steps:
-      - name: setup Python
-        uses: actions/setup-python@v4
-        with:
-            python-version: "3.10"
       - run: >
           ARTIFACT_ID=$(curl -L 
           -H "Accept: application/vnd.github+json" 
