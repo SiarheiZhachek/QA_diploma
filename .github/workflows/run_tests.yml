@@ -43,7 +43,6 @@ jobs:
           -o pages.zip
       
       
-      - run: cp pages_history/history/* reports && cp -r pages_history/history reports
       - name: Store allure history
         uses: actions/upload-artifact@v3
         with:
