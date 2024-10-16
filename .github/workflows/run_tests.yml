@@ -58,6 +58,10 @@ jobs:
    
 
     steps:
+      - name: setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - run: python3 --version
       - name: Checkout repository
         uses: actions/checkout@v3
