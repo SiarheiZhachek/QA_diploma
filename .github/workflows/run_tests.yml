@@ -14,6 +14,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Download history
     steps:
+      - run: zip --help
+      - run: zip --version
       - run: >
           ARTIFACT_ID=$(curl -L 
           -H "Accept: application/vnd.github+json" 
